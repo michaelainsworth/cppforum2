@@ -3,7 +3,6 @@ project(cppforum2)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -stdlib=libc++")
 
-# TODO: Set the components.
 find_package(Soci REQUIRED)
 
 include_directories("${CMAKE_SOURCE_DIR}")
