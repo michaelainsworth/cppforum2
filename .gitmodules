@@ -1,3 +1,0 @@
-[submodule "src/vendor/soci"]
-	path = src/vendor/soci
-	url = git@github.com:SOCI/soci.git
