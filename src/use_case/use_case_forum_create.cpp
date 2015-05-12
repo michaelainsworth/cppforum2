@@ -16,8 +16,7 @@ std::error_condition use_case_forum_create::operator ()() {
         return error::admin_required;
     }
     
-    forum* existing = repo_.get<std::string,forum>(forum_id_);
-    if (existing) {
+    if (repo_.has<std::string,forum>(forum_id_)) {
         return error::forum_exists;
     }
     
