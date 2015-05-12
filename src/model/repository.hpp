@@ -20,6 +20,11 @@ public:
     typedef unique_cache<std::string, usr> usr_id_cache_t;
     
     repository(soci::session& db);
+
+    template<typename K, typename T>
+    bool has(const K& k) {
+        return get<K,T>(k) != nullptr;
+    }
     
     template<typename K, typename T>
     T* get(const K& k);
@@ -35,17 +40,5 @@ private:
     usr_id_cache_t usr_id_cache_;
     
 };
-
-template<>
-usr* repository::get<std::string, usr>(const std::string& k) {
-    // TODO: Implement
-    return nullptr;
-}
-
-template<>
-forum* repository::get<std::string, forum>(const std::string& k) {
-    // TODO: Implement
-    return nullptr;
-}
 
 #endif // #ifndef CPPFORUM2_REPOSITORY_HPP_INCLUDED
