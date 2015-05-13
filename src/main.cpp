@@ -2,6 +2,8 @@
 #include <string>
 #include <boost/filesystem.hpp>
 #include <cstdlib>
+#include "cppforum2.hpp"
+#include <soci/soci.h>
 using namespace std;
 using namespace boost::filesystem;
 
