@@ -14,6 +14,7 @@
 #include "model/repository.hpp"
 #include "model/thread.hpp"
 #include "model/usr.hpp"
+#include "utility/config.hpp"
 #include "utility/unique_cache.hpp"
 
 #endif // #ifndef CPPFORUM2_HPP_INCLUDED

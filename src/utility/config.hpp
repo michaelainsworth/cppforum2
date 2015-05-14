@@ -2,9 +2,12 @@
 #define CPPFORUM2_CONFIG_HPP_INCLUDED
 
 #include <string>
+#include <system_error>
 
 class config {
 public:
+
+    static config load(const char* config_file);
     
     config();
     config(const std::string& database, const std::string& schema);
