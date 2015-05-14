@@ -8,6 +8,8 @@ public:
     
     typedef unsigned long long key_t;
     
+    post(repository& repo, key_t post_key);
+    
     // TODO: Finish
     
 private:

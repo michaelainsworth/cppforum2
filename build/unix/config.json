@@ -1,0 +1,4 @@
+{
+    "database":"sqlite3://dbname=forum.sqlite3",
+    "schema":"../../src/schema"
+}
