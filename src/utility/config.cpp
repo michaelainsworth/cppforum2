@@ -53,6 +53,7 @@ config config::load(const char* config_file) {
         throw std::system_error(error::config_file_database_missing);
     }
 
+    return config(d["database"].GetString(), schema_dir);
 }
 
 const std::string& config::database() const {
