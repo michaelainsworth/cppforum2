@@ -17,9 +17,7 @@ namespace soci {
 class repository {
 public:
     
-    typedef unique_cache<std::string, usr> usr_id_cache_t;
-    
-    repository(soci::session& db);
+    repository(soci::session& db, const std::string& schema_directory);
 
     template<typename K, typename T>
     bool has(const K& k) {
@@ -29,6 +27,12 @@ public:
     template<typename K, typename T>
     T* get(const K& k);
     
+protected:
+    
+    // Caching helpers
+    template<typename K,typename T>
+    unique_cache<K, T>& cache();
+    
 private:
     
     // No copying.
@@ -36,8 +40,7 @@ private:
     repository& operator =(const repository& that) = delete;
     
     soci::session& db_;
-    
-    usr_id_cache_t usr_id_cache_;
+    std::string schema_directory_;
     
 };
 

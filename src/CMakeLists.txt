@@ -9,6 +9,7 @@ find_package(Boost COMPONENTS system filesystem REQUIRED)
 
 include_directories("${CMAKE_SOURCE_DIR}")
 include_directories(${SOCI_INCLUDE_DIR})
+include_directories(${Boost_INCLUDE_DIRS})
 include_directories("${CMAKE_SOURCE_DIR}/vendor/rapidjson/include")
 
 link_directories("${SOCI_LIBRARY_DIR}")

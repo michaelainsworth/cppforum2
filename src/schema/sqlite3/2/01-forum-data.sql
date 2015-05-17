@@ -1,0 +1,1 @@
+insert into forum (forum_id, forum_name, description) values ("general", "General Discussion", "This is a forum for general discussion, created by the installation process.");

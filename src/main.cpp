@@ -14,7 +14,7 @@ int main() {
         config conf = config::load(std::getenv("CPPFORUM2_CONFIG"));
 
         session db(conf.database());
-        repository repo(db);
+        repository repo(db, conf.schema());
 
         return 0;
     } catch (std::system_error& e) {

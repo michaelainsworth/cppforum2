@@ -4,7 +4,7 @@
 #include "model/forum.hpp"
 #include "model/repository.hpp"
 
-cmd_forum_create::cmd_forum_create(repository& repo, soci::session& db, const std::string usr_id, const std::string& forum_id, const std::string& description) : cmd(repo, db, usr_id), forum_id_(forum_id), description_(description) {}
+cmd_forum_create::cmd_forum_create(repository& repo, soci::session& db, const std::string usr_id, const std::string& forum_id, const std::string& name, const std::string& description) : cmd(repo, db, usr_id), forum_id_(forum_id), name_(name), description_(description) {}
 
 std::error_condition cmd_forum_create::operator ()() {
     
@@ -20,7 +20,7 @@ std::error_condition cmd_forum_create::operator ()() {
         return error::forum_exists;
     }
     
-    new_forum_ = new forum(repo_, 0, forum_id_, description_);
+    new_forum_ = new forum(repo_, 0, forum_id_, name_, description_);
     tx_.save<forum>(*new_forum_);
     tx_.commit();
     
