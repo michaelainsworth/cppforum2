@@ -1,3 +1,6 @@
 [submodule "src/vendor/rapidjson"]
 	path = src/vendor/rapidjson
 	url = git@github.com:miloyip/rapidjson.git
+[submodule "src/vendor/booster_cgix"]
+	path = src/vendor/booster_cgix
+	url = git@github.com:michaelainsworth/Booster.Cgix.git
