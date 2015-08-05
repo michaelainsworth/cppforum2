@@ -15,6 +15,12 @@ int main() {
 
         session db(conf.database());
         repository repo(db, conf.schema());
+        
+        booster::cgix::cgi_gateway gw;
+        application app(gw);
+        
+        app.run();
+        
 
         return 0;
     } catch (std::system_error& e) {
