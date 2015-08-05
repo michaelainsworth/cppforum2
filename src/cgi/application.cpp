@@ -8,7 +8,7 @@ application::application(booster::cgix::gateway& gw) : booster::cgix::applicatio
 
 void application::setup_routes() {
     on("GET", "/test", [](booster::cgix::connection& con) {
-        booster::cgix::response& resp = con.response();
+        booster::cgix::response& resp = con.get_response();
         
         resp << response::ok;
         resp << booster::cgix::cookie("some_cookie", "1234");
@@ -18,7 +18,7 @@ void application::setup_routes() {
 }
 
 void application::connection_not_handled(booster::cgix::connection& con) {
-    booster::cgix::response& resp = con.response();
+    booster::cgix::response& resp = con.get_response();
     
     resp << response::ok;
     resp << booster::cgix::cookie("some_cookie", "1234");
