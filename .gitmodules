@@ -4,3 +4,6 @@
 [submodule "src/vendor/booster_cgix"]
 	path = src/vendor/booster_cgix
 	url = git@github.com:michaelainsworth/Booster.Cgix.git
+[submodule "src/vendor/jsoncpp"]
+	path = src/vendor/jsoncpp
+	url = git@github.com:open-source-parsers/jsoncpp.git

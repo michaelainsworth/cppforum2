@@ -1,10 +1,10 @@
+// TODO: Change include style.
 #include "utility/config.hpp"
+#include <fstream>
 #include "model/error.hpp"
 #include <cstdio>
-#include <rapidjson/document.h>
-#include <rapidjson/filereadstream.h>
 #include <boost/filesystem.hpp>
-using namespace rapidjson;
+#include <json/json.h>
 using namespace boost::filesystem;
 using namespace std;
 
@@ -15,45 +15,42 @@ config::config(const std::string& database, const std::string& schema) : databas
 config config::load(const char* config_file) {
 
     if (!config_file) {
-	throw std::system_error(error::missing_config_file);
+        throw std::system_error(error::missing_config_file);
     }
 
     path config_file_path(config_file);
     if (!exists(config_file_path)) {
-	throw std::system_error(error::config_file_not_exists);
+        throw std::system_error(error::config_file_not_exists);
     }
 
     if (!is_regular_file(config_file_path)) {
         throw std::system_error(error::config_file_not_file);
     }
     
-    FILE* fp = fopen(config_file, "r");
-    char buffer[2048];
-    FileReadStream is(fp, buffer, sizeof(buffer));
-    Document d;
-    d.ParseStream(is);
-    fclose(fp);
-    
-    if (!d.IsObject()) {
-        throw std::system_error(error::config_file_not_json);
+    ifstream fin(config_file);
+    Json::Value value;
+    fin >> value;
+
+    if (!value.isObject()) {
+        throw std::system_error(error::config_file_not_json);        
     }
     
-    if (!d.HasMember("schema") || !d["schema"].IsString()) {
-	throw std::system_error(error::config_file_schema_missing);
+    if (!value["schema"].isString()) {
+        throw std::system_error(error::config_file_schema_missing);
     }
-    
-    string schema_dir = d["schema"].GetString();
+
+    string schema_dir = value["schema"].asString();
     path schema_dir_path(schema_dir);
     
     if (!exists(schema_dir_path) || !is_directory(schema_dir_path)) {
         throw std::system_error(error::config_file_schema_not_dir);
     }
     
-    if (!d.HasMember("database") || !d["database"].IsString()) {
+    if (!value["database"].isString()) {
         throw std::system_error(error::config_file_database_missing);
     }
 
-    return config(d["database"].GetString(), schema_dir);
+    return config(value["database"].asString(), schema_dir);
 }
 
 const std::string& config::database() const {
