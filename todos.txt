@@ -1,0 +1,1 @@
+* Change the update scripts to not be directory based, but file based. E.g., one file for one update script.
