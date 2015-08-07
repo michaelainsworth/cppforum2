@@ -10,8 +10,8 @@ using namespace soci;
 using namespace boost;
 using namespace boost::filesystem;
 
-std::string get_file_contents(const std::string& file_path) {
-    ifstream fin(file_path.c_str());
+std::string get_file_contents(const path& version_file) {
+    ifstream fin(version_file.string().c_str());
     fin.seekg(0, ios::end);
     ios::pos_type length = fin.tellg();
     fin.seekg(0, ios::beg);
@@ -22,30 +22,29 @@ std::string get_file_contents(const std::string& file_path) {
     return str;
 }
 
-void upgrade_database(soci::session& db, const string& backend_schema_directory, int version) {
-    typedef std::vector<path> path_vector;
-
-    path version_directory(backend_schema_directory + "/" + lexical_cast<string>(version));
-    path_vector paths;
+void upgrade_database(soci::session& db, const path& version_file, int version) {
+    string sql = get_file_contents(version_file);
     
-    copy(directory_iterator(version_directory), directory_iterator(), back_inserter(paths));
-    sort(paths.begin(), paths.end());
+    string delimiter = "-- SEPARATOR";
+    string::size_type delimiter_length = delimiter.length();
     
-    for (auto &p : paths) {
-        string file_path_name = p.generic_string();
-        if (file_path_name.rfind(".sql") == file_path_name.length() - 4) {
-            string sql = get_file_contents(file_path_name);
-            db << sql;
+    string::size_type last = 0, i = 0;
+    while (true) {
+        i = sql.find(delimiter, last);
+        string subsql = sql.substr(last, i - last);
+        
+        if (i == string::npos) {
+            break;
+        } else {
+            last = i + delimiter_length;
         }
     }
 }
 
 repository::repository(session& db, const std::string& schema_directory) : db_(db), schema_directory_(schema_directory) {
-    
-    
     string backend_schema_directory = schema_directory_ + "/" + db_.get_backend()->get_backend_name();
-    
-    upgrade_database(db_, backend_schema_directory, 1);
+    string version_1_string = backend_schema_directory + "/1.sql";
+    upgrade_database(db_, version_1_string, 1);
     
     string version_string;
     indicator ind;
@@ -60,13 +59,13 @@ repository::repository(session& db, const std::string& schema_directory) : db_(d
     
     for (version = version + 1; true; ++version) {
         version_string = lexical_cast<string>(version);
-        string version_directory_string = backend_schema_directory + "/" + version_string;
-        path version_directory(version_directory_string);
-        
-        if (!exists(version_directory)) {
+        string version_file_string = backend_schema_directory + "/" + version_string + ".sql";
+        path version_file(version_file_string);
+   
+        if (!exists(version_file)) {
             break;
         } else {
-            upgrade_database(db_, backend_schema_directory, version);
+            upgrade_database(db_, version_file, version);
             db_ << "update opt set opt_value = ? where opt_id = 'database_version'", use(version_string);
         }
     }

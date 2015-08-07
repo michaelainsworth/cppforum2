@@ -1,4 +1,4 @@
 {
     "database":"sqlite3://dbname=forum.sqlite3",
-    "schema":"../../src/schema"
+    "schema":"../../src/lib/cppforum2/schema"
 }
