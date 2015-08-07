@@ -9,3 +9,5 @@ echo >> cppforum2.hpp
 
 echo "#endif // #ifndef CPPFORUM2_HPP_INCLUDED" >> cppforum2.hpp
 echo >> cppforum2.hpp
+
+mv -f cppforum2.hpp src/lib/cppforum2/cppforum2.hpp

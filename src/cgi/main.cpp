@@ -18,9 +18,7 @@ int main() {
         
         booster::cgix::cgi_gateway gw;
         application app(gw);
-        
         app.run();
-        
 
         return 0;
     } catch (std::system_error& e) {
