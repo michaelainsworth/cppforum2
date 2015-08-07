@@ -1,8 +1,8 @@
-#include "cmd_forum_create.hpp"
-#include "model/error.hpp"
-#include "model/usr.hpp"
-#include "model/forum.hpp"
-#include "model/repository.hpp"
+#include <cppforum2/cmd/cmd_forum_create.hpp>
+#include <cppforum2/model/error.hpp>
+#include <cppforum2/model/usr.hpp>
+#include <cppforum2/model/forum.hpp>
+#include <cppforum2/model/repository.hpp>
 
 cmd_forum_create::cmd_forum_create(repository& repo, soci::session& db, const std::string usr_id, const std::string& forum_id, const std::string& name, const std::string& description) : cmd(repo, db, usr_id), forum_id_(forum_id), name_(name), description_(description) {}
 

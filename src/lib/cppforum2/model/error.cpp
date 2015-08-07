@@ -1,4 +1,4 @@
-#include "model/error.hpp"
+#include <cppforum2/model/error.hpp>
 
 const char* error_category::name() const noexcept(true) {
     return "forum";

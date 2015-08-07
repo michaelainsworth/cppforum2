@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "model/error.hpp"
-#include "database/unit_of_work.hpp"
+#include <cppforum2/model/error.hpp>
+#include <cppforum2/database/unit_of_work.hpp>
 
 class repository;
 class database;

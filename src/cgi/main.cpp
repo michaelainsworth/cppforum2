@@ -2,7 +2,8 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
-#include "cppforum2.hpp"
+#include <cppforum2/cppforum2.hpp>
+#include "application.hpp"
 #include <soci/soci.h>
 #include <exception>
 using namespace std;

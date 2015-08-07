@@ -1,8 +1,8 @@
 #ifndef CMD_FORUM_CREATE_HPP_INCLUDED
 #define CMD_FORUM_CREATE_HPP_INCLUDED
 
-#include "cmd/cmd.hpp"
-#include "model/forum.hpp"
+#include <cppforum2/cmd/cmd.hpp>
+#include <cppforum2/model/forum.hpp>
 
 #include <string>
 

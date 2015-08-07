@@ -2,7 +2,6 @@
 #define CPPFORUM2_APPLICATION_HPP_INCLUDED
 
 #include <booster/cgix/cgix.hpp>
-#include <initializer_list>
 
 class application : public booster::cgix::application {
 public:

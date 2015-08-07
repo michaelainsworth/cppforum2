@@ -1,4 +1,4 @@
-#include "database/unit_of_work.hpp"
+#include <cppforum2/database/unit_of_work.hpp>
 
 unit_of_work::unit_of_work(repository& repo, soci::session& db) : repo_(repo), db_(db) {}
 

@@ -1,4 +1,4 @@
-#include "model/repository.hpp"
+#include <cppforum2/model/repository.hpp>
 #include <soci.h>
 #include <iostream>
 #include <fstream>

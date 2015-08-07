@@ -3,10 +3,9 @@
 
 #include <string>
 
-#include "model/usr.hpp"
-#include "model/forum.hpp"
-
-#include "utility/unique_cache.hpp"
+#include <cppforum2/model/usr.hpp>
+#include <cppforum2/model/forum.hpp>
+#include <cppforum2/utility/unique_cache.hpp>
 
 class usr;
 

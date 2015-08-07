@@ -1,7 +1,7 @@
 // TODO: Change include style.
-#include "utility/config.hpp"
+#include <cppforum2/utility/config.hpp>
 #include <fstream>
-#include "model/error.hpp"
+#include <cppforum2/model/error.hpp>
 #include <cstdio>
 #include <boost/filesystem.hpp>
 #include <json/json.h>
